@@ -1,0 +1,5 @@
+{
+  "project": "gcp-notifications-lab",
+  "pubsubTopic": "event-management",
+  "pubsubSubscription": "event-management-subscription"
+}
