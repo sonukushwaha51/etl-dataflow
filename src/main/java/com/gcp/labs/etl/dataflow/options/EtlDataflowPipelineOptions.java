@@ -1,6 +1,7 @@
 package com.gcp.labs.etl.dataflow.options;
 
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
+import org.apache.beam.sdk.options.Default;
 import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.Validation;
@@ -12,6 +13,7 @@ public interface EtlDataflowPipelineOptions extends DataflowPipelineOptions, Pip
     @Description("Project Id")
     @Validation.Required
     @NotNull
+    @Default
     String getProject();
 
     void setProjectId(String projectId);
@@ -26,6 +28,15 @@ public interface EtlDataflowPipelineOptions extends DataflowPipelineOptions, Pip
     @Validation.Required
     String getPubsubSubscription();
 
-    void setPubsubSubscription();
+    void setPubsubSubscription(String pubsubSubscription);
+
+    @Validation.Required
+    String getCsvPublisherSubscription();
+
+    void setCsvPublisherSubscription(String csvPublisherSubscription);
+
+    String getCsvFilePath();
+
+    void setCsvFilePath(String csvFilePath);
 
 }

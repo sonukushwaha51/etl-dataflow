@@ -1,5 +1,7 @@
 {
   "project": "gcp-notifications-lab",
   "pubsubTopic": "event-management",
-  "pubsubSubscription": "event-management-subscription"
+  "pubsubSubscription": "event-management-subscription",
+  "csvPublisherSubscription": "csv-publisher-subscription",
+  "csvFilePath": "gs://"
 }
