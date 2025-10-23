@@ -61,5 +61,8 @@ steps:
       - |
         gsutil cp src/main/resources/pipeline-options.json gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 substitutions:
   _VERSION: '1.1.0-SNAPSHOT'
