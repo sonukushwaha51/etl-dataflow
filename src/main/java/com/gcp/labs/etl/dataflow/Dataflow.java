@@ -21,7 +21,7 @@ public class Dataflow {
 
     public static void main(String[] args) {
 
-        EtlDataflowPipelineOptions etlDataflowPipelineOptions = PipelineOptionsFactory.fromArgs(args).as(EtlDataflowPipelineOptions.class);
+        EtlDataflowPipelineOptions etlDataflowPipelineOptions = PipelineOptionsFactory.fromArgs(args).withValidation().as(EtlDataflowPipelineOptions.class);
 
         String eventPubsubTopic = PubsubClient.topicPathFromName(etlDataflowPipelineOptions.getProject(), etlDataflowPipelineOptions.getPubsubTopic()).toString();
         String eventPubsubSubscription = PubsubClient.subscriptionPathFromName(etlDataflowPipelineOptions.getProject(), etlDataflowPipelineOptions.getPubsubSubscription()).toString();

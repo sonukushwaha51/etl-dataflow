@@ -1,0 +1,65 @@
+steps:
+  - name: 'gcr.io/cloud-builders/mvn'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'mvn clean package'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker build -t us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build versioned image ${_VERSION}'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker build -t us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:${_VERSION}'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push docker image'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'docker push us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest'
+
+      - name: 'gcr.io/cloud-builders/docker'
+        id: 'Push versioned image ${_VERSION}'
+        entrypoint: 'bash'
+        args:
+          - '-c'
+          - 'docker push us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:${_VERSION}'
+
+  - name: google/cloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud dataflow flex-template build \
+        --image "us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest" \
+        --sdk-language "JAVA" \
+        --flex-template-base-image "JAVA17" \
+        --output "gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template.json"
+
+  - name: google/cloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud dataflow flex-template build \
+        --image "us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest" \
+        --sdk-language "JAVA" \
+        --flex-template-base-image "JAVA17" \
+        --output "gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template-${_VERSION}.json"
+
+  - name: google/cloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gsutil cp src/main/resources/pipeline-options.json gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json
+
+substitutions:
+  _VERSION: '1.1.0-SNAPSHOT'
