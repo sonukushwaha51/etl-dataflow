@@ -3,6 +3,7 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 COPY ..
+COPY target/*.jar etl-dataflow.jar
 RUN mvn clean package
 
-CMD ["java", "-jar", "target/etl-dataflow-1.1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "target/etl-dataflow.jar"]

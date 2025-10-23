@@ -64,5 +64,9 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
 
+#options:
+#  logging: GCS_ONLY
+#  logsBucket: gs://dataflow-bucket-quickstart/cloud-build-logs/
+
 substitutions:
   _VERSION: '1.1.0-SNAPSHOT'
