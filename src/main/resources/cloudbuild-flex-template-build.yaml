@@ -34,7 +34,7 @@ steps:
       - 'flex-template'
       - 'build'
       - 'gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template-latest.json'
-      - '--image=us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest}'
+      - '--image=us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest'
       - '--sdk-language=JAVA'
       - '--flex-template-base-image=JAVA17'
 
