@@ -9,14 +9,14 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker build -t us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest'
+      - 'docker build -t us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest .'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build versioned image ${_VERSION}'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'docker build -t us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:${_VERSION}'
+      - 'docker build -t us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:${_VERSION} .'
 
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push docker image'
