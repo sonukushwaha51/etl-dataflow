@@ -1,9 +1,4 @@
 steps:
-  - name: 'gcr.io/cloud-builders/mvn'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'mvn clean package'
 
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
@@ -41,7 +36,7 @@ steps:
         --image "us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:latest" \
         --sdk-language "JAVA" \
         --flex-template-base-image "JAVA17" \
-        --output "gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template.json"
+        "gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template.json"
 
   - name: google/cloud-sdk:alpine
     entrypoint: 'bash'
@@ -52,7 +47,7 @@ steps:
         --image "us-central1-docker.pkg.dev/eighth-saga-474816-a6/dataflow-docker-artifactory/etl-dataflow:${_VERSION}" \
         --sdk-language "JAVA" \
         --flex-template-base-image "JAVA17" \
-        --output "gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template-${_VERSION}.json"
+        "gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template-${_VERSION}.json"
 
   - name: google/cloud-sdk:alpine
     entrypoint: 'bash'
