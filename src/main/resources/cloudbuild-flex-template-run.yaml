@@ -1,0 +1,8 @@
+steps:
+  - name: gcloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - '-c'
+        |
+        gcloud dataflow flex-template run "etl-dataflow-${_VERSION}-$(date +%Y%m%d-%H%M%S)"\
+        --parameters-input-file "gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json"
