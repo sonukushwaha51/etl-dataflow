@@ -20,10 +20,9 @@ steps:
     args:
       - '-c'
       - |
-        PARAMS=$(cat /workspace/parameters.txt)
         gcloud dataflow flex-template run "etl-dataflow-${_VERSION}-$(date +%Y%m%d-%H%M%S)" \
           --template-file-gcs-location="gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template.json" \
-          --parameters="${PARAMS}" \
+          --parameters="$(cat /workspace/parameters.txt)" \
           --temp-location="gs://dataflow-bucket-quickstart/etl-dataflow/temp" \
           --staging-location="gs://dataflow-bucket-quickstart/etl-dataflow/staging" \
           --num-workers=1 \
