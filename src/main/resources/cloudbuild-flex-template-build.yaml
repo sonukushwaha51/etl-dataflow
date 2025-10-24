@@ -47,7 +47,7 @@ steps:
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - 'gsutil'
+      - 'storage'
       - 'cp'
       - 'src/main/resources/pipeline-options.json'
       - 'gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json'
