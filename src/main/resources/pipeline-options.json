@@ -3,5 +3,5 @@
   "pubsubTopic": "event-management",
   "pubsubSubscription": "event-management-subscription",
   "csvPublisherSubscription": "csv-publisher-subscription",
-  "csvFilePath": "gs://"
+  "csvFilePath": "gs://dataflow-bucket-quickstart/event-csv"
 }
