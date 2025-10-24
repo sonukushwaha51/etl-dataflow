@@ -2,7 +2,21 @@ steps:
   - name: gcloud-sdk:alpine
     entrypoint: 'bash'
     args:
-      - '-c'
-        |
-        gcloud dataflow flex-template run "etl-dataflow-${_VERSION}-$(date +%Y%m%d-%H%M%S)"\
-        --parameters-input-file "gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json"
+      - 'gcloud'
+      - 'dataflow'
+      - 'flex-template'
+      - 'run'
+      - 'etl-dataflow-${_VERSION}-$(date +%Y%m%d-%H%M%S)'
+      - '--template-file-gcs-location="gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template.json'
+      - '--parameters-from-file=gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json'
+      - '--tempLocation=gs://dataflow-bucket-quickstart/etl-dataflow/temp'
+      - '--stagingLocation=gs://dataflow-bucket-quickstart/etl-dataflow/staging'
+      - '--num-workers=1'
+      - '--max-workers=1'
+      - '--region=us-central1'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _VERSION: '1.1.0-SNAPSHOT'
