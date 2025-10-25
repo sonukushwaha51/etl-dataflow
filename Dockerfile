@@ -18,13 +18,18 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create a minimal production image with the compiled JAR
-FROM openjdk:17-slim
+FROM gcr.io/dataflow-templates-base/java17-template-launcher-base AS base
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the built JAR file from the 'builder' stage
+# Copy the built JAR file from the 'builder' stage into the final image.
 COPY --from=builder /app/target/*.jar etl-dataflow.jar
 
+# Specify the main class of your pipeline.
+ENV FLEX_TEMPLATE_JAVA_MAIN_CLASS="com.gcp.labs.etl.dataflow.Dataflow"
+
+# Specify the classpath to the JAR file.
+ENV FLEX_TEMPLATE_JAVA_CLASSPATH="/app/target/etl-dataflow.jar"
+
 # Define the entrypoint to run the JAR
-ENTRYPOINT ["java", "-jar", "etl-dataflow.jar"]
+ENTRYPOINT [/opt/google/dataflow/java_template_launcher"]
