@@ -104,7 +104,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
                 <configuration>
-                    <finalName>etl-dataflow</finalName>
+                    <finalName>etl-dataflow-shaded</finalName>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             <mainClass>com.gcp.labs.etl.dataflow.Dataflow</mainClass>

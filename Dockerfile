@@ -23,7 +23,7 @@ FROM gcr.io/dataflow-templates-base/java17-template-launcher-base AS base
 WORKDIR /app
 
 # Copy the built JAR file from the 'builder' stage into the final image.
-COPY --from=builder /app/target/*.jar etl-dataflow.jar
+COPY --from=builder /app/target/etl-dataflow-shaded.jar etl-dataflow.jar
 
 # Specify the main class of your pipeline.
 ENV FLEX_TEMPLATE_JAVA_MAIN_CLASS="com.gcp.labs.etl.dataflow.Dataflow"
