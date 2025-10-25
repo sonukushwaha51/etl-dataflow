@@ -23,6 +23,7 @@ public class MapPubsubMessageToEventDoFn extends DoFn<PubsubMessage, Event> {
     public void processElement(DoFn<PubsubMessage, Event>.ProcessContext context, BoundedWindow boundedWindow) {
         try {
             PubsubMessage message = context.element();
+            LOGGER.info("Event received: {}", message.getPayload());
             Event event = objectMapperSingletonResource.getResource().readValue(message.getPayload(), Event.class);
             context.output(event);
         } catch (Exception exception) {

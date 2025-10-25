@@ -29,7 +29,7 @@ COPY --from=builder /app/target/*.jar etl-dataflow.jar
 ENV FLEX_TEMPLATE_JAVA_MAIN_CLASS="com.gcp.labs.etl.dataflow.Dataflow"
 
 # Specify the classpath to the JAR file.
-ENV FLEX_TEMPLATE_JAVA_CLASSPATH="/app/target/etl-dataflow.jar"
+ENV FLEX_TEMPLATE_JAVA_CLASSPATH="/app/etl-dataflow.jar"
 
 # Define the entrypoint to run the JAR
 ENTRYPOINT [/opt/google/dataflow/java_template_launcher"]
