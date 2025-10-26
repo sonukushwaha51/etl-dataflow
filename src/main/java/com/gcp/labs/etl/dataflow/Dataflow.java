@@ -9,6 +9,7 @@ import com.gcp.labs.etl.dataflow.options.EtlDataflowPipelineOptions;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.apache.beam.sdk.Pipeline;
+import org.apache.beam.sdk.extensions.avro.coders.AvroCoder;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubClient;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
@@ -30,6 +31,7 @@ public class Dataflow {
         Injector injector = Guice.createInjector();
 
         Pipeline pipeline = Pipeline.create(etlDataflowPipelineOptions);
+        pipeline.getCoderRegistry().registerCoderForClass(Event.class, AvroCoder.of(Event.SCHEMA));
 
         PCollection<Event> collection = pipeline
                 .apply("Read Pubsub Message", PubsubIO.readMessagesWithAttributes().withIdAttribute("id").fromSubscription(eventPubsubSubscription))
