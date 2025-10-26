@@ -6,6 +6,9 @@ import org.apache.beam.sdk.transforms.windowing.BoundedWindow;
 
 public class SaveToDatastoreDoFn extends DoFn<Event, Void> {
 
+    public SaveToDatastoreDoFn() {
+
+    }
 
     @ProcessElement
     public void processElement(DoFn<Event, Void>.ProcessContext context, BoundedWindow boundedWindow) {
