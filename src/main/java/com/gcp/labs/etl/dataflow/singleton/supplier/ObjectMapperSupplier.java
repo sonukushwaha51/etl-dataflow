@@ -2,7 +2,9 @@ package com.gcp.labs.etl.dataflow.singleton.supplier;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gcp.labs.etl.dataflow.singleton.SerializerSupplier;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class ObjectMapperSupplier implements SerializerSupplier<ObjectMapper> {
     @Override
     public ObjectMapper get() {

@@ -1,11 +1,14 @@
 package com.gcp.labs.etl.dataflow.singleton;
 
+import com.google.inject.Inject;
+
 import java.io.Serializable;
 
 public abstract class SingletonResource<T> implements Serializable {
 
     private final SerializerSupplier<T> serializerSupplier;
 
+    @Inject
     public SingletonResource(SerializerSupplier<T> serializerSupplier) {
         this.serializerSupplier = serializerSupplier;
     }
