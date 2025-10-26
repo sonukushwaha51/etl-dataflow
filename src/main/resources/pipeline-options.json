@@ -3,5 +3,11 @@
   "pubsubTopic": "event-management",
   "pubsubSubscription": "event-management-sub",
   "csvPublisherSubscription": "csv-publisher-sub",
-  "csvFilePath": "gs://dataflow-bucket-quickstart/event-csv"
+  "csvFilePath": "gs://dataflow-bucket-quickstart/event-csv",
+  "tempLocation": "gs://dataflow-bucket-quickstart/etl-dataflow/temp",
+  "stagingLocation": "gs://dataflow-bucket-quickstart/etl-dataflow/staging",
+  "region": "us-central1",
+  "runner": "DataflowRunner",
+  "numWorkers": 1,
+  "maxWorkers": 1
 }

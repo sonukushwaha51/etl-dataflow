@@ -25,6 +25,7 @@ public class Dataflow {
 
         String eventPubsubTopic = PubsubClient.topicPathFromName(etlDataflowPipelineOptions.getProject(), etlDataflowPipelineOptions.getPubsubTopic()).toString();
         String eventPubsubSubscription = PubsubClient.subscriptionPathFromName(etlDataflowPipelineOptions.getProject(), etlDataflowPipelineOptions.getPubsubSubscription()).toString();
+        String csvPublisherSubscription = PubsubClient.subscriptionPathFromName(etlDataflowPipelineOptions.getProject(), etlDataflowPipelineOptions.getCsvPublisherSubscription()).toString();
 
         Injector injector = Guice.createInjector();
 
@@ -35,7 +36,7 @@ public class Dataflow {
                 .apply("Map PubSub Message to Event", ParDo.of(injector.getInstance(MapPubsubMessageToEventDoFn.class)));
 
         PCollection<Event> excelProcessingCollection = pipeline
-                .apply("Read from CSV subscription", PubsubIO.readMessagesWithAttributes().withIdAttribute("id").fromSubscription(etlDataflowPipelineOptions.getCsvPublisherSubscription()))
+                .apply("Read from CSV subscription", PubsubIO.readMessagesWithAttributes().withIdAttribute("id").fromSubscription(csvPublisherSubscription))
                 .apply("Extract CSV file Path", ParDo.of(injector.getInstance(ExtractCsvFilePathDoFn.class)))
                 .apply("Read from storage bucket and convert to event", ParDo.of(injector.getInstance(ReadFromStorageToEventDoFn.class)));
 
