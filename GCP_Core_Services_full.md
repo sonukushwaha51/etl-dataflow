@@ -1,4 +1,4 @@
-# GCP Hands-On Labs & Study Guide (Combined)
+# GCP Study Guide (Combined)
 
 This document contains six detailed sections covering: **Compute Engine**, **Dataflow (Java)**, **Google Kubernetes Engine (GKE)**, **Cloud Run**, **Cloud Functions (Java & Node.js)**, and **App Engine**.
 Each section includes: overview, architecture (ASCII), detailed key concepts, command snippets with explanations, sample configuration (where applicable), real-world example, best practices, and references.
