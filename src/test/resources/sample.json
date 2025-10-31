@@ -1,0 +1,17 @@
+{
+  "eventId": "ORDER_PURCHASE",
+  "eventUuid": "69680ba0-f057-47fa-a00a-4cff639e13c8",
+  "timestamp": 1761486693830,
+  "fields": {
+    "customerId": "1986425732",
+    "transactionDate": "2025-10-26T10:00Z",
+    "email": "sonukushwaha51@gmail.com",
+    "firstName": "SONU",
+    "items": [
+      {
+        "skuId": "987654",
+        "price": "6999.50"
+      }
+    ]
+  }
+}

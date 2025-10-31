@@ -1,8 +1,6 @@
 package com.gcp.labs.etl.dataflow.event;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
 import org.apache.beam.sdk.extensions.avro.coders.AvroCoder;
@@ -10,6 +8,8 @@ import org.apache.beam.sdk.extensions.avro.coders.AvroCoder;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Event {
 
