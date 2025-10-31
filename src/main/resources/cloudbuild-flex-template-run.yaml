@@ -1,0 +1,37 @@
+steps:
+  - name: google/cloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - 'gsutil'
+      - 'cp'
+      - 'gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json'
+      - '/workspace/pipeline-options.json'
+
+  - name: google/cloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        apk add --no-cache jq
+        jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|join(",")' /workspace/pipeline-options.json > /workspace/parameters.txt
+
+  - name: google/cloud-sdk:alpine
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud dataflow flex-template run "etl-dataflow-$(date +%Y%m%d-%H%M%S)" \
+          --template-file-gcs-location="gs://dataflow-bucket-quickstart/flex-template/etl-dataflow-flex-template.json" \
+          --parameters="$(cat /workspace/parameters.txt)" \
+          --temp-location="gs://dataflow-bucket-quickstart/etl-dataflow/temp" \
+          --staging-location="gs://dataflow-bucket-quickstart/etl-dataflow/staging" \
+          --num-workers=1 \
+          --max-workers=1 \
+          --region="us-central1" \
+          --worker-machine-type="e2-standard-2"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _VERSION: '1.1.0-SNAPSHOT'
