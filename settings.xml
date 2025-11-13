@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd">
+
+    <servers>
+        <server>
+            <id>java-releases</id>
+            <name>Release jar Artifactory</name>
+            <username>oauth2accesstoken</username>
+            <password>${env.ARTIFACT_REGISTRY_TOKEN}</password>
+
+        </server>
+        <server>
+            <id>java-snapshots</id>
+            <name>Snapshot Artifactory</name>
+            <username>oauth2accesstoken</username>
+            <password>${env.ARTIFACT_REGISTRY_TOKEN}</password>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>java-releases</id>
+                    <name>Release jar Artifactory</name>
+                    <url>https://us-central1-maven.pkg.dev/eighth-saga-474816-a6/releases-local</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>java-snapshots</id>
+                    <name>Snapshot Artifactory</name>
+                    <url>https://us-central1-maven.pkg.dev/eighth-saga-474816-a6/snapshots-local</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                </repository>
+
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <url>https://repo.maven.apache.org/maven2</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>java-releases</id>
+                    <name>Release jar Artifactory</name>
+                    <url>https://us-central1-maven.pkg.dev/eighth-saga-474816-a6/releases-local</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>java-snapshots</id>
+                    <name>Snapshot Artifactory</name>
+                    <url>https://us-central1-maven.pkg.dev/eighth-saga-474816-a6/snapshots-local</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+</settings>
