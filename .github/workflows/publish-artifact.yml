@@ -1,0 +1,59 @@
+name: Publish artifact
+
+permissions:
+  contents: read
+  id-token: write
+
+on:
+  push:
+    branches:
+      - feature/*
+      - develop
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: "17"
+        distribution: "temurin"
+        cache: maven
+
+    - name: Authenticate to GCP
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    - name: Set access token to env
+      run: |
+        echo "ARTIFACT_REGISTRY_TOKEN=$(gcloud auth print-access-token)" >> $GITHUB_ENV
+
+    - name: Determine artifactory url
+      run: |
+        branch_name=${GITHUB_REF#ref/heads/}
+        if [[ $branch_name == 'main' ]]; then
+          ARTIFACTORY_URL="https://us-central1-maven.pkg.dev/eighth-saga-474816-a6/releases-local"
+        else
+          ARTIFACTORY_URL="https://us-central1-maven.pkg.dev/eighth-saga-474816-a6/snapshots-local"
+        fi        
+
+    - name: Extract Maven version
+      id: get_version
+      run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
+    - name: Build and publish
+      run:
+        |
+        GROUP_ID="com.gcp.labs"
+        ARTIFACT_ID="etl-dataflow"
+        mvn deploy -B -f ./pom.xml -Ddeploy.version=${VERSION} -Ddeploy.repository.url=${ARTIFACTORY_URL} -Ddeploy.groupId=${GROUP_ID} -Ddeploy.repository.id=${ARTIFACT_ID} --settings ./settings.xml
+        
+
+
