@@ -8,25 +8,15 @@ import org.apache.beam.sdk.options.Validation;
 
 public interface EtlDataflowPipelineOptions extends DataflowPipelineOptions, PipelineOptions {
 
-    @Description("Pub sub topic on which message will be posted")
-    @Validation.Required
-    String getPubsubTopic();
-
-    void setPubsubTopic(String pubsubTopic);
-
     @Description("Subscritption for pubsub topic")
     @Validation.Required
-    String getPubsubSubscription();
+    String getEventPubsubSubscription();
 
-    void setPubsubSubscription(String pubsubSubscription);
+    void setEventPubsubSubscription(String eventPubsubSubscription);
 
     @Validation.Required
-    String getCsvPublisherSubscription();
+    String getFailureGcsPath();
 
-    void setCsvPublisherSubscription(String csvPublisherSubscription);
-
-    String getCsvFilePath();
-
-    void setCsvFilePath(String csvFilePath);
+    void setFailureGcsPath(String failureGcsPath);
 
 }

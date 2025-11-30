@@ -12,7 +12,7 @@ public class SingletonHolder implements Serializable {
     public <T> T getOrInitialize(SerializerSupplier<T> serializerSupplier, Class<T> singleton, String className) {
         if (!map.containsKey(className)) {
             synchronized (this) {
-                map.put(className, singleton);
+                map.put(className, serializerSupplier.get());
                 return serializerSupplier.get();
             }
         }

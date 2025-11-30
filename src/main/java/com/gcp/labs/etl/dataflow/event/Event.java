@@ -3,7 +3,6 @@ package com.gcp.labs.etl.dataflow.event;
 import lombok.*;
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
-import org.apache.beam.sdk.extensions.avro.coders.AvroCoder;
 
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class Event {
             .longType().and()
             .booleanType().and()
             .doubleType().and()
-            .array().items().map().values().unionOf().stringType().and().booleanType().and().longType().endUnion()
+            .array().items().map().values().unionOf().stringType().and().booleanType().and().longType().and().doubleType().endUnion()
             .endUnion()
             .noDefault()
             .endRecord();

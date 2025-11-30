@@ -1,11 +1,9 @@
 {
   "project": "eighth-saga-474816-a6",
-  "pubsubTopic": "event-management",
-  "pubsubSubscription": "event-management-sub",
-  "csvPublisherSubscription": "csv-publisher-sub",
-  "csvFilePath": "gs://dataflow-bucket-quickstart/event-csv",
-  "tempLocation": "gs://dataflow-bucket-quickstart/etl-dataflow/temp",
-  "stagingLocation": "gs://dataflow-bucket-quickstart/etl-dataflow/staging",
+  "eventPubsubSubscription": "event-management-sub",
+  "tempLocation": "gs://dataflow-bucket-quickstart/etl-dataflow/temp/",
+  "stagingLocation": "gs://dataflow-bucket-quickstart/etl-dataflow/staging/",
   "region": "us-central1",
-  "runner": "DataflowRunner"
+  "runner": "DataflowRunner",
+  "failureGcsPath": "gs://event-bucket/failure/"
 }

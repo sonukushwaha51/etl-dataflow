@@ -4,7 +4,7 @@ steps:
     args:
       - 'gsutil'
       - 'cp'
-      - 'gs://dataflow-bucket-quickstart/pipeline-options/pipeline-options.json'
+      - 'gs://dataflow-bucket-quickstart/etl-dataflow/pipeline-options/pipeline-options.json'
       - '/workspace/pipeline-options.json'
 
   - name: google/cloud-sdk:alpine
@@ -26,12 +26,10 @@ steps:
           --temp-location="gs://dataflow-bucket-quickstart/etl-dataflow/temp" \
           --staging-location="gs://dataflow-bucket-quickstart/etl-dataflow/staging" \
           --num-workers=1 \
+          --streaming=true \
           --max-workers=1 \
           --region="us-central1" \
           --worker-machine-type="e2-standard-2"
 
 options:
   logging: CLOUD_LOGGING_ONLY
-
-substitutions:
-  _VERSION: '1.1.0-SNAPSHOT'
