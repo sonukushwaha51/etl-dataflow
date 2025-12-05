@@ -37,12 +37,11 @@ public class ReadFromStorageToEventDoFn extends DoFn<String, Event> {
                     fields.put("email", csvRecord.get("email"));
                     fields.put("customerIdentifier", csvRecord.get("identifier"));
                     fields.put("skuId", csvRecord.get("skuId"));
-                    Event event = Event.builder()
-                            .eventId(csvRecord.get("eventId"))
-                            .eventUuid(UUID.randomUUID().toString())
-                            .timestamp(Instant.now().toEpochMilli())
-                            .fields(fields)
-                            .build();
+                    Event event = new Event();
+                    event.setEventId(csvRecord.get("eventId"));
+                    event.setEventUuid(UUID.randomUUID().toString());
+                    event.setTimestamp(Instant.now().toEpochMilli());
+                    event.setFields(fields);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

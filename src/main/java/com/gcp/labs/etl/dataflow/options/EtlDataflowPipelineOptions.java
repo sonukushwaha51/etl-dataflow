@@ -19,4 +19,16 @@ public interface EtlDataflowPipelineOptions extends DataflowPipelineOptions, Pip
 
     void setFailureGcsPath(String failureGcsPath);
 
+    String getBigTableOrdersInstanceId();
+
+    void setBigTableOrdersInstanceId(String bigTableOrdersInstanceId);
+
+    String getBigTableOrdersTableId();
+
+    void setBigTableOrdersTableId(String bigTableOrdersTableId);
+
+    String getBigQueryTableName();
+
+    void setBigQueryTableName(String bigQueryTableName);
+
 }

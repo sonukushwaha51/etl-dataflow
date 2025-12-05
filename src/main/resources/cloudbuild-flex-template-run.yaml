@@ -29,6 +29,7 @@ steps:
           --streaming=true \
           --max-workers=1 \
           --region="us-central1" \
+          --service-account-email="pubsub-publsiher-765@eighth-saga-474816-a6.iam.gserviceaccount.com" \
           --worker-machine-type="e2-standard-2"
 
 options:

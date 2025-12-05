@@ -1,17 +1,27 @@
 {
   "eventId": "ORDER_PURCHASE",
   "eventUuid": "69680ba0-f057-47fa-a00a-4cff639e13c8",
-  "timestamp": 1761486693830,
+  "timestamp": 1764703027530,
+  "orderNumber": "CN-MUM-0001",
+  "purchases": [
+    {
+      "skuId": "987654",
+      "currentPrice": 6999.50
+    }
+  ],
+  "transaction": {
+    "transactionDate": 1764703027530,
+    "transactionId": 7865539853,
+    "transactionMethod": "Online_Card",
+    "totalAmount": 6499.50,
+    "transactionAmount": 5499.50,
+    "discount": 1500.00
+  },
   "fields": {
-    "customerId": "1986425732",
-    "transactionDate": "2025-10-26T10:00Z",
+    "userId": "1986425732",
     "email": "sonukushwaha51@gmail.com",
     "firstName": "SONU",
-    "items": [
-      {
-        "skuId": "987654",
-        "price": "6999.50"
-      }
-    ]
+    "orderShippedDate": null,
+    "orderDeliveredDate": null
   }
 }
